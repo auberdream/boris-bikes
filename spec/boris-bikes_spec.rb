@@ -14,7 +14,7 @@ describe DockingStation do
   it 'checks if bike is docked' do
     bike = Bike.new
     subject.dock(bike)
-    expect(subject.bike).to eq bike
+    expect(subject.bikes).to eq [bike]
   end
 
   it 'fails if a bike is released when there is no bike' do
@@ -22,8 +22,6 @@ describe DockingStation do
   end
 
   it 'fails if a bike is docked when the station is full' do
-    subject.dock(Bike.new)
-    bike = Bike.new
-    expect{subject.dock(bike)}.to raise_error
+    expect{21.times {subject.dock(Bike.new)}}.to raise_error
   end
 end
