@@ -20,7 +20,20 @@ describe DockingStation do
     expect {DockingStation.new.release_bike}.to raise_error
   end
 
-  it 'fails if a bike is docked when the station is full' do
+  it 'fails if a bike is docked when the station is full at default capacity' do
     expect{(DEFAULT_CAPACITY+1).times {subject.dock(Bike.new)}}.to raise_error
+  end
+
+  it 'fails if a bike is docked when the station is full at custom capacity' do
+    docking_station = DockingStation.new(40)
+    expect{41.times {docking_station.dock(Bike.new)}}.to raise_error
+  end
+
+  it 'has an instance variable for the capacity' do
+    expect(DockingStation.new.capacity)
+  end
+
+  it 'accepts a capacity other than the default' do
+    expect(DockingStation.new(40).capacity).to eq 40
   end
 end
