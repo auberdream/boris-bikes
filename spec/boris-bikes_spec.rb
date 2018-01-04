@@ -20,4 +20,10 @@ describe DockingStation do
   it 'fails if a bike is released when there is no bike' do
     expect {DockingStation.new.release_bike}.to raise_error
   end
+
+  it 'fails if a bike is docked when the station is full' do
+    subject.dock(Bike.new)
+    bike = Bike.new
+    expect{subject.dock(bike)}.to raise_error
+  end
 end
